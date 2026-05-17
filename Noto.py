@@ -24,6 +24,7 @@ def getpath(relativepath):
 def loadfont(fontpath):
     windll.gdi32.AddFontResourceExW(fontpath, FR_PRIVATE, 0)
 loadfont(getpath("Khuja-Uppercase.otf"))
+loadfont(getpath("Magnolia.ttf"))
 def gifbg():
     global afterid
     if afterid:
@@ -31,7 +32,7 @@ def gifbg():
     for widget in app.winfo_children():
         widget.destroy()
     frames = []
-    gif = Image.open(getpath("coolstar.gif"))
+    gif = Image.open(getpath("infbg.gif"))
     for frame in ImageSequence.Iterator(gif):
         frame = frame.copy().convert("RGBA")
         r, g, b, a = frame.split()
@@ -50,8 +51,11 @@ def gifbg():
     return canvas, canvasbg
 def main():
     canvas, canvasbg = gifbg()
-    canvas.create_text(300, 30, text="yo", font=('Khuja Uppercase Uppercase', 21), fill="#ffffff", anchor="center")
-
+    canvas.create_text(304, 34, text="Noto", font=("Khuja Uppercase Uppercase", 37), fill="#585454", anchor='center')
+    canvas.create_text(300, 30, text="Noto", font=('Khuja Uppercase Uppercase', 37), fill="#bbb5b5", anchor="center")
+    notebox = ctk.CTkTextbox(app, width=500, height=200, fg_color="#111111", text_color="white", border_color="white", border_width=1, corner_radius=8, font=("OriginalMagnolia", 14), wrap='word')
+    notebox.place(x=50, y=80)
+    summarybox = ctk.CTkTextbox(app, width=500, height=150, fg_color="#111111", text_color='white')
 
 
 main()
