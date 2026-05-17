@@ -59,6 +59,13 @@ def main():
     summarybox.place(x=50, y=385)
     submitshdw = canvas.create_text(303, 353, text="Summarize", font=('Khuja Uppercase Uppercase', 24), fill="#585454", anchor='center')
     submit = canvas.create_text(300, 350, text="Summarize", font=('Khuja Uppercase Uppercase', 24), fill="#bbb5b5", anchor='center')
+    def summarizenotes(e=None):
+        notes= notebox.get("1.0", "end-1c")
+        summarybox.delete("1.0", "end")
+        if notes.strip() =="":
+            summarybox.insert('1.0', "Insert text first.")
+            return
+        summarybox.insert("1.0", "summ")
     def enter(e):
         canvas.itemconfig(submitshdw, fill="#0a0a0a")
         canvas.itemconfig(submit, fill="#585454")
@@ -69,10 +76,9 @@ def main():
     canvas.tag_bind(submitshdw, "<Enter>", enter)
     canvas.tag_bind(submitshdw, "<Leave>", leave)
     canvas.tag_bind(submit, "<Leave>", leave)
-    canvas.tag_bind(submitshdw, "<Button-1>", main)
-    canvas.tag_bind(submit, "<Button-1>", main)
+    canvas.tag_bind(submitshdw, "<Button-1>", summarizenotes)
+    canvas.tag_bind(submit, "<Button-1>", summarizenotes)
+
 
 main()
-
-
 app.mainloop()
