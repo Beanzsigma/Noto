@@ -78,7 +78,12 @@ def main():
         if filepath:
             with open(filepath, "w", encoding='utf-8') as file:
                 file.write(notebox.get("1.0", "end-1c"))
-    def loadnotes(e=none)
+    def loadnotes(e=None):
+        filepath = filedialog.askopenfilename(filetypes=[("Text files", "*.txt")])
+        if filepath:
+            with open(filepath, "r", encoding="utf-8") as file:
+                notebox.delete('1.0', 'end')
+                notebox.insert('1.0', file.read())
     def summarizenotes(e=None):
         notes= notebox.get("1.0", "end-1c")
         summarybox.delete("1.0", "end")
@@ -102,6 +107,8 @@ def main():
     def leave(e):
         canvas.itemconfig(submit, fill="#bbb5b5")
         canvas.itemconfig(submitshdw, fill="#585454")
+    savebuttonshdw = canvas.create_text(78, 353, text='Save', font=('Khuja Uppercase Uppercase', 20), fill="#585454")
+    savebutton = canvas.create_text(75, 350, text='Save', font=('Khuja Uppercase Uppercase', 20), fill="#bbb5b5")
     canvas.tag_bind(submit, "<Enter>", enter)
     canvas.tag_bind(submitshdw, "<Enter>", enter)
     canvas.tag_bind(submitshdw, "<Leave>", leave)
