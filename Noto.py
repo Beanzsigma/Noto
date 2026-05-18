@@ -74,10 +74,18 @@ def main():
     submitshdw = canvas.create_text(303, 353, text="Summarize", font=('Khuja Uppercase Uppercase', 24), fill="#585454", anchor='center')
     submit = canvas.create_text(300, 350, text="Summarize", font=('Khuja Uppercase Uppercase', 24), fill="#bbb5b5", anchor='center')
     def savenotes(e=None):
+        notes = notebox.get('1.0', 'end-1c')
+        summary= summarybox.get("1.0", 'end-1c')
+        if summary.strip() =="":
+            summarybox.insert('1.0', "Summarize something before saving.")
+            return
         filepath = filedialog.asksaveasfilename(defaultextension=".txt", filetypes=[("Text files", "*.txt")])
         if filepath:
-            with open(filepath, "w", encoding='utf-8') as file:
-                file.write(notebox.get("1.0", "end-1c"))
+            with open(filepath, "w", encoding="utf-8") as file:
+                file.write('NOTES : \n')
+                file.write(notes)
+                file.write('\n\nSummary: \n')
+                file.write(summary)
     def loadnotes(e=None):
         filepath = filedialog.askopenfilename(filetypes=[("Text files", "*.txt")])
         if filepath:
@@ -111,7 +119,8 @@ def main():
     savebutton = canvas.create_text(55, 350, text='Save', font=('Khuja Uppercase Uppercase', 17), fill="#bbb5b5")
     loadbuttonshdw = canvas.create_text(538, 353, text='Load', font=('Khuja Uppercase Uppercase', 17), fill="#585454")
     loadbutton = canvas.create_text(535, 350, text="Load", font=('Khuja Uppercase Uppercase', 17), fill="#bbb5b5")
-    canvas.create_text(550, 550, text="Powered by Groq", font=(""))
+    canvas.create_text(532, 590, text="Powered by Groq", font=("OriginalMagnolia", 10), fill="#585454")
+    canvas.create_text(530, 588, text="Powered by Groq", font=("OriginalMagnolia", 10), fill="#bbb5b5")
     def enterload(e):
         canvas.itemconfig(loadbutton, fill="#585454")
         canvas.itemconfig(loadbuttonshdw, fill="#0a0a0a")
