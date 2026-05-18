@@ -7,11 +7,13 @@ from comtypes import CLSCTX_ALL
 from tkinter import Canvas, Text
 from PIL import Image, ImageSequence, ImageTk
 import pythoncom 
+from dotenv import load_dotenv
 import threading
 from groq import Groq
 afterid = None
 import sys
 import os
+load_dotenv()
 GROQkey = os.environ.get("GROQ_API_KEY")
 client = Groq(api_key=GROQkey)
 app = ctk.CTk()
@@ -75,10 +77,16 @@ def main():
             summarybox.insert('1.0', "Insert text first.")
             return
         summarybox.insert("1.0", "Summarizing...")
-    def runsummarynotes():
-        try:
-            summary = summarizegroq(notes)
-            app.after(0, )
+        def runsummarynotes():
+            try:
+                summary = summarizegroq(notes)
+                app.after(0, lambda: showsummary(summary))
+            except Exception as ex:
+                app.after(0, lambda: showsummary(f"Error: {ex}"))
+        def showsummary(summary):
+            summarybox.delete("1.0", 'end')
+            summarybox.insert("1.0", summary)
+        threading.Thread(target=runsummarynotes, daemon=True).start()
     def enter(e):
         canvas.itemconfig(submitshdw, fill="#0a0a0a")
         canvas.itemconfig(submit, fill="#585454")
