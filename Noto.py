@@ -10,6 +10,7 @@ import pythoncom
 from dotenv import load_dotenv
 import threading
 from groq import Groq
+from tkinter import filedialog
 afterid = None
 import sys
 import os
@@ -56,7 +57,9 @@ def gifbg():
     animate()
     return canvas, canvasbg
 def summarizegroq(notes):
-    response = client.chat.completions.create(model="llama-3.1-8b-instant", messages=[{"role": "system","content": "You summarize notes into clear and concise key points. Use short bullet points."},{"role": "user","content": notes}],
+    response = client.chat.completions.create(model="llama-3.1-8b-instant", messages=[{"role": "system","content": "You summarize notes into clear and concise key points. Use short bullet points. If the notes are too short or something like that, "
+    "take your best guess, and NEVER ask questions and stuff like that. YOU ARE SUPPOSED TO SUMMARIZE NOTES, if the given notes don't explain stuff, you also don't explain stuff. All you do is summarize that's it. Don't"
+    "include anything else, just these things."},{"role": "user","content": notes}],
         temperature=0.3,
         max_tokens=300)
     return response.choices[0].message.content
@@ -70,6 +73,12 @@ def main():
     summarybox.place(x=50, y=385)
     submitshdw = canvas.create_text(303, 353, text="Summarize", font=('Khuja Uppercase Uppercase', 24), fill="#585454", anchor='center')
     submit = canvas.create_text(300, 350, text="Summarize", font=('Khuja Uppercase Uppercase', 24), fill="#bbb5b5", anchor='center')
+    def savenotes(e=None):
+        filepath = filedialog.asksaveasfilename(defaultextension=".txt", filetypes=[("Text files", "*.txt")])
+        if filepath:
+            with open(filepath, "w", encoding='utf-8') as file:
+                file.write(notebox.get("1.0", "end-1c"))
+    def loadnotes(e=none)
     def summarizenotes(e=None):
         notes= notebox.get("1.0", "end-1c")
         summarybox.delete("1.0", "end")
