@@ -27,6 +27,6 @@
 ### Download the EXE file which can be found here: (https://github.com/Beanzsigma/Noto/releases/tag/v1). Then, double click to run. Enter your notes, and click the summarize button to summarize it. NOTE: Windows might warn about unknown publisher. To run, click "More info,"  then "Run anyway." FYI: Some users may experience glitches when running this code, as when I tested on my Windows Surface, the UI was messed up. However, it did work on my other laptop.
 
 ## PROJECT SCREENSHOT
-
+<img width="592" height="625" alt="Screenshot 2026-05-17 183801" src="https://github.com/user-attachments/assets/7865b58a-f77e-4202-a77d-9ea2a8d51ddb" />
 
 
