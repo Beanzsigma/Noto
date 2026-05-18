@@ -24,7 +24,7 @@
 ### This project is a competition between my friend and I, seeing who can build the best note-summarizing app on windows. 
 
 ## How to deploy
-### Download the EXE file which can be found here: (). Then, double click to run. Enter your notes, and click the summarize button to summarize it. NOTE: Windows might warn about unknown publisher. To run, click "More info,"  then "Run anyway." FYI: Some users may experience glitches when running this code, as when I tested on my Windows Surface, the UI was messed up. However, it did work on my other laptop.
+### Download the EXE file which can be found here: (https://github.com/Beanzsigma/Noto/releases/tag/v1). Then, double click to run. Enter your notes, and click the summarize button to summarize it. NOTE: Windows might warn about unknown publisher. To run, click "More info,"  then "Run anyway." FYI: Some users may experience glitches when running this code, as when I tested on my Windows Surface, the UI was messed up. However, it did work on my other laptop.
 
 ## PROJECT SCREENSHOT
 
