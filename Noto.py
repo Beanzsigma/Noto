@@ -1,21 +1,21 @@
 import customtkinter as ctk
-import sounddevice as sd
-import struct
-from ctypes import windll, byref, create_unicode_buffer, create_string_buffer
+from ctypes import windll
 from groq import Groq
-from comtypes import CLSCTX_ALL
-from tkinter import Canvas, Text
+from tkinter import Canvas, filedialog
 from PIL import Image, ImageSequence, ImageTk
-import pythoncom 
 from dotenv import load_dotenv
 import threading
-from groq import Groq
-from tkinter import filedialog
-afterid = None
 import sys
 import os
+afterid = None
 ctk.set_appearance_mode("dark")
-load_dotenv()
+def getpath(relativepath):
+    try:
+        basepath = sys._MEIPASS
+    except AttributeError:
+        basepath = os.path.abspath('.')
+    return os.path.join(basepath, relativepath)
+load_dotenv(getpath(".env"))
 GROQkey = os.environ.get("GROQ_API_KEY")
 client = Groq(api_key=GROQkey)
 app = ctk.CTk()
@@ -23,12 +23,6 @@ app.title("Noto")
 app.geometry('600x600')
 app.resizable(False, False)
 FR_PRIVATE = 0x10
-def getpath(relativepath):
-    try:
-        basepath = sys._MEIPASS
-    except AttributeError:
-        basepath = os.path.abspath('.')
-    return os.path.join(basepath, relativepath)
 def loadfont(fontpath):
     windll.gdi32.AddFontResourceExW(fontpath, FR_PRIVATE, 0)
 loadfont(getpath("Khuja-Uppercase.otf"))
