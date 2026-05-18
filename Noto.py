@@ -10,6 +10,8 @@ import threading
 afterid = None
 import sys
 import os
+GROQkey = os.environ.get("GROQ_API_KEY")
+client = Groq(api_key=GROQkey)
 app = ctk.CTk()
 app.title("Noto")
 app.geometry('600x600')
