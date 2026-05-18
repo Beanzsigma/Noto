@@ -184,5 +184,6 @@ def main():
     canvas.tag_bind(copybutton, "<Leave>", leavecopy)
     canvas.tag_bind(copybutton, "<Button-1>", copysummary)
     canvas.tag_bind(copybuttonshdw, "<Button-1>", copysummary)
+app.iconbitmap(getpath('iconnn.ico'))
 main()
 app.mainloop()
