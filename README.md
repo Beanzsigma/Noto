@@ -11,8 +11,8 @@
 - Python
 - CustomTkinter - minimalistic UI
 - Tkinter Canvas - UI elements, text
-- Pillow/PIl - loading and animating the GIF background
-- Groq API - AI not summarization
+- Pillow/PIL - loading and animating the GIF background
+- Groq API - AI summarization
 - Python dotenv - loading hidden API key from .env
 
 ## How can others contribute to Noto?
