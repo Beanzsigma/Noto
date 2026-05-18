@@ -14,6 +14,7 @@ from tkinter import filedialog
 afterid = None
 import sys
 import os
+ctk.set_appearance_mode("dark")
 load_dotenv()
 GROQkey = os.environ.get("GROQ_API_KEY")
 client = Groq(api_key=GROQkey)
@@ -73,11 +74,19 @@ def main():
     summarybox.place(x=50, y=385)
     submitshdw = canvas.create_text(303, 353, text="Summarize", font=('Khuja Uppercase Uppercase', 24), fill="#585454", anchor='center')
     submit = canvas.create_text(300, 350, text="Summarize", font=('Khuja Uppercase Uppercase', 24), fill="#bbb5b5", anchor='center')
+    def copysummary(e=None):
+        summary = summarybox.get("1.0", "end-1c")
+        if summary.strip() == "":
+            summarybox.delete("1.0", "end")
+            summarybox.insert("1.0", "Nothing to copy")
+            return
+        app.clipboard_clear()
+        app.clipboard_append(summary)
     def savenotes(e=None):
         notes = notebox.get('1.0', 'end-1c')
         summary= summarybox.get("1.0", 'end-1c')
         if summary.strip() =="":
-            summarybox.insert('1.0', "Summarize something before saving.")
+            summarybox.insert('1.0', "Summarize something before saving.") 
             return
         filepath = filedialog.asksaveasfilename(defaultextension=".txt", filetypes=[("Text files", "*.txt")])
         if filepath:
@@ -151,5 +160,19 @@ def main():
     canvas.tag_bind(savebuttonshdw, "<Button-1>", savenotes)
     canvas.tag_bind(loadbutton, "<Button-1>", loadnotes)
     canvas.tag_bind(loadbuttonshdw, "<Button-1>", loadnotes)
+    copybuttonshdw = canvas.create_text(303, 590, text="Copy Summary", font=('Khuja Uppercase Uppercase', 14), fill="#585454")
+    copybutton = canvas.create_text(300, 588, text="Copy Summary", font=('Khuja Uppercase Uppercase', 14), fill="#bbb5b5")
+    def entercopy(e):
+        canvas.itemconfig(copybutton, fill="#585454")
+        canvas.itemconfig(copybuttonshdw, fill="#0a0a0a")
+    def leavecopy(e):
+        canvas.itemconfig(copybuttonshdw, fill="#585454")
+        canvas.itemconfig(copybutton, fill="#bbb5b5")
+    canvas.tag_bind(copybutton, "<Enter>", entercopy)
+    canvas.tag_bind(copybuttonshdw,"<Enter>", entercopy)
+    canvas.tag_bind(copybuttonshdw, "<Leave>", leavecopy)
+    canvas.tag_bind(copybutton, "<Leave>", leavecopy)
+    canvas.tag_bind(copybutton, "<Button-1>", copysummary)
+    canvas.tag_bind(copybuttonshdw, "<Button-1>", copysummary)
 main()
 app.mainloop()
