@@ -3,10 +3,12 @@ import sounddevice as sd
 import struct
 from ctypes import windll, byref, create_unicode_buffer, create_string_buffer
 from groq import Groq
+from comtypes import CLSCTX_ALL
 from tkinter import Canvas, Text
 from PIL import Image, ImageSequence, ImageTk
 import pythoncom 
 import threading
+from groq import Groq
 afterid = None
 import sys
 import os
@@ -51,6 +53,11 @@ def gifbg():
         afterid = app.after(20, animate, (frame_index+1) % len(frames))
     animate()
     return canvas, canvasbg
+def summarizegroq(notes):
+    response = client.chat.completions.create(model="llama-3.1-8b-instant", messages=[{"role": "system","content": "You summarize notes into clear and concise key points. Use short bullet points."},{"role": "user","content": notes}],
+        temperature=0.3,
+        max_tokens=300)
+    return response.choices[0].message.content
 def main():
     canvas, canvasbg = gifbg()
     canvas.create_text(304, 34, text="Noto", font=("Khuja Uppercase Uppercase", 37), fill="#585454", anchor='center')
@@ -67,7 +74,11 @@ def main():
         if notes.strip() =="":
             summarybox.insert('1.0', "Insert text first.")
             return
-        summarybox.insert("1.0", "summ")
+        summarybox.insert("1.0", "Summarizing...")
+    def runsummarynotes():
+        try:
+            summary = summarizegroq(notes)
+            app.after(0, )
     def enter(e):
         canvas.itemconfig(submitshdw, fill="#0a0a0a")
         canvas.itemconfig(submit, fill="#585454")
