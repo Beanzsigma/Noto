@@ -5,7 +5,7 @@ a = Analysis(
     ['Noto.py'],
     pathex=[],
     binaries=[],
-    datas=[('infbg.gif', '.'), ('Khuja-Uppercase.otf', '.'), ('Magnolia.ttf', '.'), ('.env', '.')],
+    datas=[('infbg.gif', '.'), ('Khuja-Uppercase.otf', '.'), ('Magnolia.ttf', '.'), ('iconnn.ico', '.'), ('.env', '.')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
@@ -35,4 +35,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
+    icon=['iconnn.ico'],
 )
